@@ -1,0 +1,88 @@
+### **📌 Stack và Heap trong bộ nhớ**
+Trong lập trình C++, bộ nhớ được chia thành nhiều vùng khác nhau, trong đó **stack (ngăn xếp)** và **heap (đống)** là hai vùng quan trọng nhất khi cấp phát bộ nhớ cho biến và dữ liệu.
+
+---
+
+## **1️⃣ Stack - Bộ nhớ ngăn xếp**
+🔹 **Đặc điểm**:
+- Lưu trữ **biến cục bộ** và dữ liệu có **vòng đời ngắn**.
+- **Tự động cấp phát** và **giải phóng** (khi hàm kết thúc).
+- Hoạt động theo cơ chế **LIFO (Last In, First Out)**.
+- Kích thước **giới hạn** (thường vài MB).
+- Truy xuất **nhanh hơn** heap.
+
+🔹 **Ví dụ:**
+```cpp
+void foo() {
+    int x = 10;   // Biến x nằm trên stack
+    int arr[5];   // Mảng arr cũng trên stack
+} // Khi hàm kết thúc, x và arr bị giải phóng
+```
+
+🔹 **Lỗi phổ biến:**
+- **Stack Overflow**: Khi sử dụng quá nhiều bộ nhớ stack, thường gặp khi gọi đệ quy không có điểm dừng.
+```cpp
+void recursive() {
+    int arr[100000]; // Quá lớn, dễ gây Stack Overflow
+    recursive();     // Gọi đệ quy vô hạn
+}
+```
+
+---
+
+## **2️⃣ Heap - Bộ nhớ đống**
+🔹 **Đặc điểm**:
+- Lưu trữ **dữ liệu động**, có thể tồn tại ngoài phạm vi hàm.
+- **Cấp phát bằng tay** bằng `new/malloc` và **giải phóng bằng tay** bằng `delete/free`.
+- Không có giới hạn cố định nhưng truy xuất **chậm hơn** stack.
+- Có thể gây **rò rỉ bộ nhớ** nếu không giải phóng đúng cách.
+
+🔹 **Ví dụ:**
+```cpp
+void foo() {
+    int* p = new int(10);   // Cấp phát trên heap
+    delete p;               // Giải phóng bộ nhớ tránh rò rỉ
+}
+```
+
+🔹 **Lỗi phổ biến:**
+- **Memory Leak (Rò rỉ bộ nhớ)**: Quên `delete` sau khi `new`.
+```cpp
+void leak() {
+    int* p = new int(100); // Cấp phát nhưng không giải phóng
+} // p bị mất nhưng vẫn chiếm bộ nhớ
+```
+- **Dangling Pointer (Con trỏ lủng lẳng)**: Giải phóng bộ nhớ nhưng vẫn sử dụng.
+```cpp
+int* p = new int(5);
+delete p;
+cout << *p; // Lỗi! Truy cập vùng nhớ đã giải phóng
+```
+
+---
+
+## **3️⃣ So sánh Stack vs Heap**
+| Tiêu chí | Stack | Heap |
+|----------|-------|------|
+| **Cấp phát** | Tự động | Thủ công (`new`/`delete`) |
+| **Giải phóng** | Khi hàm kết thúc | Phải tự `delete` |
+| **Tốc độ** | Nhanh | Chậm hơn |
+| **Giới hạn** | Có (vài MB) | Không giới hạn rõ ràng |
+| **Lỗi phổ biến** | Stack Overflow | Memory Leak, Dangling Pointer |
+
+---
+
+### **📌 Khi nào dùng Stack và Heap?**
+✅ **Dùng stack khi**:
+- Biến cục bộ, dữ liệu nhỏ, vòng đời ngắn.
+- Hiệu suất quan trọng.
+
+✅ **Dùng heap khi**:
+- Dữ liệu lớn cần tồn tại lâu dài.
+- Dùng con trỏ để quản lý bộ nhớ linh hoạt.
+
+🔥 **Tóm lại**:  
+👉 **Stack** nhanh, tiện nhưng có giới hạn.  
+👉 **Heap** linh hoạt, nhưng dễ gây rò rỉ nếu không quản lý tốt.  
+
+Bạn cần thêm ví dụ hay muốn thử code không? 🚀
