@@ -1,0 +1,87 @@
+o(1) - o(logn) - o(n) - o(nlogn) - o(n^2) - o(2^n) - o(n!)
+
+Rất hay em! Dưới đây là bảng tổng hợp **độ phức tạp thời gian** của các thuật toán em nêu – thầy sẽ phân nhóm và phân tích ngắn gọn, dễ nhớ, kèm mẹo tư duy cho từng loại:
+
+---
+
+## 📦 **I. Thuật toán tìm kiếm**
+
+| Thuật toán        | Độ phức tạp | Điều kiện sử dụng        | Ghi chú bản chất |
+|-------------------|-------------|--------------------------|------------------|
+| **Linear Search** | `O(n)`      | Mảng **chưa sắp xếp**    | Duyệt từng phần tử |
+| **Binary Search** | `O(log n)`  | Mảng **đã sắp xếp**      | Chia đôi dần |
+
+---
+
+## 🌲 **II. Duyệt đồ thị (DFS, BFS)**
+
+| Thuật toán | Độ phức tạp       | Khi nào dùng | Ghi nhớ |
+|------------|-------------------|--------------|---------|
+| **DFS**    | `O(V + E)`        | Duyệt sâu    | Dùng stack/đệ quy |
+| **BFS**    | `O(V + E)`        | Duyệt rộng   | Dùng queue |
+
+> ✅ `V` là số đỉnh, `E` là số cạnh  
+> ✅ Duyệt cả đồ thị = thăm từng đỉnh và từng cạnh
+
+---
+
+## 🧹 **III. Thuật toán sắp xếp cơ bản**
+
+| Thuật toán        | Best Case     | Average Case     | Worst Case      | Ổn định (Stable)? | Ghi nhớ |
+|-------------------|---------------|------------------|------------------|-------------------|---------|
+| **Selection Sort**| `O(n²)`       | `O(n²)`          | `O(n²)`          | ❌ Không           | Tìm min – đổi chỗ |
+| **Insertion Sort**| `O(n)`        | `O(n²)`          | `O(n²)`          | ✅ Có              | Chèn từng phần tử |
+| **Bubble Sort**   | `O(n)`        | `O(n²)`          | `O(n²)`          | ✅ Có              | So sánh – hoán vị |
+
+> 🔥 Best case của Insertion và Bubble là `O(n)` nếu **mảng gần như đã sắp xếp**
+
+---
+
+## ⚡ **IV. Thuật toán sắp xếp nâng cao**
+
+| Thuật toán     	| Best Case  | Average Case | Worst Case   | Ổn định? | Ghi nhớ tư duy |
+|----------------	|------------|--------------|--------------|----------|----------------|
+| **Merge Sort** 	| `O(n log n)` | `O(n log n)` | `O(n log n)` | ✅ Có     | Chia nhỏ – gộp |
+| **Quick Sort** 	| `O(n log n)` | `O(n log n)` | `O(n²)`      | ❌ Không  | Chia theo pivot |
+| **Heap Sort**  	| `O(n log n)` | `O(n log n)` | `O(n log n)` | ❌ Không  | Xây heap – rút gọn |
+| **Counting Sort** 	| `O(n + k)` | `O(n + k)` | `O(n + k)` | ✅ Có (nếu cài đúng) | Chỉ dùng cho số nguyên nhỏ |
+| **Radix Sort** 	| `O(nk)`      | `O(nk)`     | `O(nk)`      | ✅ Có     | Dùng counting sort từng chữ số |
+| **Bucket Sort**	| `O(n + k)`   | `O(n + k)`  | `O(n²)`      | ✅ Có     | Chia mảng thành các thùng |
+
+> `k` là miền giá trị – càng nhỏ càng hiệu quả
+
+---
+
+## 🎯 Mẹo chọn thuật toán khi đi phỏng vấn:
+
+| Trường hợp | Gợi ý |
+|------------|-------|
+| Cần nhanh, ổn định, mảng lớn | Merge Sort |
+| Ít bộ nhớ, không cần ổn định | Quick Sort |
+| Mảng đã gần sắp xếp | Insertion Sort |
+| Dữ liệu nhỏ, số nguyên | Counting/Radix/Bucket |
+| Không biết gì, cần dễ code | Bubble hoặc Selection (để luyện tư duy) |
+
+---
+
+## 📌 Tóm tắt bảng so sánh sắp xếp chính:
+
+| Thuật toán     | Time (Avg)  | Time (Worst) | Stable | Space     |
+|----------------|-------------|---------------|--------|------------|
+| Bubble Sort    | `O(n²)`     | `O(n²)`       | ✅     | `O(1)`     |
+| Selection Sort | `O(n²)`     | `O(n²)`       | ❌     | `O(1)`     |
+| Insertion Sort | `O(n²)`     | `O(n²)`       | ✅     | `O(1)`     |
+| Merge Sort     | `O(n log n)`| `O(n log n)`  | ✅     | `O(n)`     |
+| Quick Sort     | `O(n log n)`| `O(n²)`       | ❌     | `O(log n)` |
+| Heap Sort      | `O(n log n)`| `O(n log n)`  | ❌     | `O(1)`     |
+| Counting Sort  | `O(n + k)`  | `O(n + k)`    | ✅     | `O(k)`     |
+| Radix Sort     | `O(nk)`     | `O(nk)`       | ✅     | `O(n + k)` |
+
+---
+
+Nếu em muốn, thầy có thể:
+- Gửi sơ đồ tư duy hoặc bảng tổng hợp dễ in ra học.
+- Luyện giải bài code thực tế và hỏi: “độ phức tạp thuật toán này là gì?”
+- Dạy cách cài từ đầu merge sort, quick sort để hiểu bản chất luồng chạy.
+
+> Em muốn tiếp theo luyện giải bài sắp xếp thực tế hay học cách phân tích đệ quy, master theorem...?
