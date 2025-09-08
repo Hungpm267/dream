@@ -47,21 +47,17 @@ int binarySearch(int a[], int n, int x){
 }
 void quick_Sort(vector<int> &v, int left, int right){
     int i = left, j = right;
-    int pivot = v[(left + right) /2];
-    while(i < j){
-        if(v[i] < pivot) i++;
-        if(v[j] > pivot) j--;
+    int pivot = v[(left + right) / 2];
+    while(i <= j){
+        while(v[i] < pivot) i++;
+        while(v[j] > pivot) j--;
         if(i <= j){
             swap(v[i], v[j]);
             i++; j--;
         }
     }
-    if(i < right) quick_Sort(v, i, right);
     if(left < j) quick_Sort(v, left, j);
-}
-void quickSort(vector<int> &v){
-    int r = v.size()-1;
-    quick_Sort(v, 0, r);
+    if(i < right) quick_Sort(v, i, right);
 }
 void xuatmang(vector<int> v){
     for (const int &i : v) {
